@@ -2,7 +2,8 @@ name: Deploy React App to GitHub Pages
 
 on:
   push:
-    branches: ["master"]  # or "main" if that's the default branch
+    branches:
+      - master  # or main, if that's your default branch
 
   workflow_dispatch:
 
@@ -31,8 +32,7 @@ jobs:
         run: npm ci
 
       - name: Build React App
-        run: |
-          CI=false npm run build
+        run: CI=false npm run build
 
       - name: List files
         run: ls -R build
@@ -49,3 +49,5 @@ jobs:
       - name: Deploy to GitHub Pages
         id: deployment
         uses: actions/deploy-pages@v4
+        with:
+          branch: gh-pages  # Ensure this matches the deployment branch
